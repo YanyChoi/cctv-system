@@ -28,6 +28,8 @@ def writeVideo():
     #현재 시간을 '년도 달 일 시간 분 초'로 가져와서 문자열로 생성
     fileName = str(currentTime.strftime('%Y-%m-%d-%H-%M-%S'))
 
+    if not os.path.exists('./video'):
+        os.makedirs('./video')
     #파일 저장하기 위한 변수 선언
     path = f'./video/{fileName}.mp4'
     
@@ -38,8 +40,21 @@ def writeVideo():
     # 비디오 저장
     # cv2.VideoWriter(저장 위치, 코덱, 프레임, (가로, 세로))
     out = cv2.VideoWriter(path, fourcc, fps, (streaming_window_width, streaming_window_height))
-
     while True:
+        #현재시간 가져오기
+        newTime = datetime.datetime.now()
+        if currentTime.hour < newTime.hour or (currentTime.hour == 23 and newTime.hour == 0):
+
+            out.release()  # out 객체 해제
+            currentTime = newTime
+            #현재 시간을 '년도 달 일 시간 분 초'로 가져와서 문자열로 생성
+            fileName = str(currentTime.strftime('%Y-%m-%d_%H:%M:%S'))
+            #파일 저장하기 위한 변수 선언
+            path = f'./video/{fileName}.mp4'
+            # 비디오 저장
+            # cv2.VideoWriter(저장 위치, 코덱, 프레임, (가로, 세로))
+            out = cv2.VideoWriter(path, fourcc, fps, (streaming_window_width, streaming_window_height))
+
         ret, frame = video_capture.read()
         # 촬영되는 영상보여준다. 프로그램 상태바 이름은 'streaming video' 로 뜬다.
         cv2.imshow('streaming video', frame)

@@ -1,0 +1,3 @@
+dotenv-python==0.0.1
+numpy==1.24.1
+opencv-python==4.6.0.66

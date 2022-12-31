@@ -4,7 +4,7 @@ Description=CCTV Stream Service
 [Service]
 WorkingDirectory=/home/yany/cctv-system/api
 User=yany
-ExecStart=/usr/bin/ python3 -m uvicorn --port 8000 main:app
+ExecStart=/usr/bin/python3 -m uvicorn --port 8000 main:app
 Restart=always
 
 [Install]

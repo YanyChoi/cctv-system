@@ -1,6 +1,6 @@
 import { Button, Grid, TextField } from "@mui/material";
 import { useState } from "react";
-import { APIKey, PASSWORD } from "../utils/prefix";
+import { PASSWORD } from "../utils/prefix";
 
 const AuthPage = ({ setPass }: { setPass: (value: boolean) => void }) => {
   const [password, setPassword] = useState("");

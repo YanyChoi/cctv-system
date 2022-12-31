@@ -1,14 +1,10 @@
 import Axios from "axios";
-import { API, APIKey } from "../utils/prefix";
+import { API } from "../utils/prefix";
 
 export const videoListAPI = async () => {
     
     const request = `${API}/video/`
 
-    const response = await Axios.get(request, {
-        headers: {
-            'access_token': APIKey
-        }
-    });
+    const response = await Axios.get(request);
     return response.data.list;
 }

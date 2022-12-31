@@ -1,8 +1,6 @@
 from fastapi import APIRouter, Response
 from fastapi.responses import StreamingResponse
 from service.stream import stream_video_service
-from fastapi.security.api_key import APIKey
-import auth
 
 router = APIRouter(
     prefix="/stream",

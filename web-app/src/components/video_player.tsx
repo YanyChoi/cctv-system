@@ -9,6 +9,7 @@ const VideoPlayer = ({ videoId }: { videoId: string }) => {
           width: '95vw'
         }}
         controls
+        autoPlay
       />
     </>
   );

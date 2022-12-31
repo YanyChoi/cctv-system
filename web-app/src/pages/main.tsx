@@ -9,6 +9,8 @@ import {
   ToggleButtonGroup,
 } from "@mui/material";
 import AuthPage from "./auth";
+import ReactPlayer from "react-player";
+import { API } from "../utils/prefix";
 const MainPage = () => {
   const [targetVideo, setTargetVideo] = useState("");
   const [content, setContent] = useState("stream");
@@ -36,14 +38,13 @@ const MainPage = () => {
           <Grid container justifyContent="center">
             {content === "stream" ? (
               <Grid container direction="column" alignContent="center">
-                {!isLoaded && (
-                  <CircularProgress />
-                )}
+                {!isLoaded && <CircularProgress />}
                 <StreamPlayer setIsLoaded={setIsLoaded} />
               </Grid>
             ) : (
               <>
                 <VideoPlayer videoId={targetVideo} />
+                {/* <ReactPlayer url={`${API}/video/${targetVideo}`} controls /> */}
                 <VideoList
                   targetVideo={targetVideo}
                   setTargetVideo={setTargetVideo}

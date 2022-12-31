@@ -1,6 +1,6 @@
 import { API } from "../utils/prefix";
 
-const StreamPlayer = () => {
+const StreamPlayer = ({setIsLoaded}: {setIsLoaded: (value: boolean) => void}) => {
   return (
     <>
       <img
@@ -8,6 +8,7 @@ const StreamPlayer = () => {
         style={{
           width: "95vw",
         }}
+        onLoad={() => setIsLoaded(true)}
       />
     </>
   );

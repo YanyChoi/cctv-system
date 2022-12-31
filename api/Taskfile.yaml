@@ -1,0 +1,9 @@
+version: 3
+
+tasks:
+  install:
+    - pip3 install -r requirements.txt
+  
+  start:
+    - sudo systemctl start cctv-record.service
+    - sudo systemctl start cctv-stream.service

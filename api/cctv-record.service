@@ -1,0 +1,10 @@
+[Unit]
+Description=CCTV Recording Service
+
+[Service]
+Type=simple
+ExecStart=~/cctv-system/api/cctv-record.sh
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

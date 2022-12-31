@@ -1,0 +1,10 @@
+[Unit]
+Description=CCTV Streaming Service
+
+[Service]
+Type=simple
+ExecStart=~/cctv-system/api/cctv-stream.sh
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

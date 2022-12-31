@@ -20,9 +20,8 @@ def stream_video_service():
         success, frame = video_capture.read()
 
         if not success:
-            break
+            return False
             # time.sleep(1)
-            # video_capture = cv2.VideoCapture(f'rtsp://{ID}:{PW}@{IP}/stream1')
             # continue
         else:
             ret, buffer = cv2.imencode('.jpg', frame)

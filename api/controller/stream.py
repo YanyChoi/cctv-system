@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Response
 from fastapi.responses import StreamingResponse
 from service.stream import stream_video_service
 from fastapi.security.api_key import APIKey
@@ -12,4 +12,7 @@ router = APIRouter(
 
 @router.get("/")
 def get_stream():
-    return StreamingResponse(stream_video_service(), media_type="multipart/x-mixed-replace; boundary=frame")
+    result = stream_video_service()
+    if result is False:
+        return Response(status_code=406)
+    return StreamingResponse(result, media_type="multipart/x-mixed-replace; boundary=frame")

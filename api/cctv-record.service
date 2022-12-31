@@ -2,9 +2,10 @@
 Description=CCTV Recording Service
 
 [Service]
-Type=simple
-ExecStart=~/cctv-system/api/cctv-record.sh
-Restart=on-failure
+WorkingDirectory=/home/yany/cctv-system/api
+User=yany
+ExecStart=/usr/bin/ python3 stream.py
+Restart=always
 
 [Install]
 WantedBy=multi-user.target

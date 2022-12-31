@@ -1,10 +1,11 @@
 [Unit]
-Description=CCTV Streaming Service
+Description=CCTV Stream Service
 
 [Service]
-Type=simple
-ExecStart=~/cctv-system/api/cctv-stream.sh
-Restart=on-failure
+WorkingDirectory=/home/yany/cctv-system/api
+User=yany
+ExecStart=/usr/bin/ python3 -m uvicorn --port 8000 main:app
+Restart=always
 
 [Install]
 WantedBy=multi-user.target

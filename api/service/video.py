@@ -6,7 +6,7 @@ from fastapi import HTTPException, Request, status
 from fastapi.responses import StreamingResponse
 import natsort
 
-PATH="./video"
+PATH="./storage/video"
 def get_video_list_service():
     files = [f for f in listdir(PATH) if isfile(join(PATH, f))]
     result = natsort.natsorted(files)

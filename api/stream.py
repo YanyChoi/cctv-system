@@ -29,10 +29,10 @@ def writeVideo():
     #현재 시간을 '년도 달 일 시간 분 초'로 가져와서 문자열로 생성
     fileName = str(currentTime.strftime('%Y-%m-%d_%H:%M:%S'))
 
-    if not os.path.exists('./video'):
-        os.makedirs('./video')
+    if not os.path.exists('./storage/video'):
+        os.makedirs('./storage/video')
     #파일 저장하기 위한 변수 선언
-    path = f'./video/{fileName}.mp4'
+    path = f'./storage/video/{fileName}.mp4'
     
     # DIVX 코덱 적용 # 코덱 종류 # DIVX, XVID, MJPG, X264, WMV1, WMV2
     # 무료 라이선스의 이점이 있는 XVID를 사용
@@ -46,13 +46,18 @@ def writeVideo():
         #현재시간 가져오기
         newTime = datetime.datetime.now()
         if currentTime.hour < newTime.hour or (currentTime.hour == 23 and newTime.hour == 0):
+            expiredTime = newTime - datetime.timedelta(days = 28)
+            expiredFile = f"./storage/video/{str(expiredTime.strftime('%Y-%m-%d_%H:%M:%S'))}.mp4"
+            if os.path.exists(expiredFile):
+                print(f'remove file {expiredFile}')
+                os.remove(expiredFile)
             print(f'store {fileName}.mp4')
             out.release()  # out 객체 해제
             currentTime = newTime
             #현재 시간을 '년도 달 일 시간 분 초'로 가져와서 문자열로 생성
             fileName = str(currentTime.strftime('%Y-%m-%d_%H:%M:%S'))
             #파일 저장하기 위한 변수 선언
-            path = f'./video/{fileName}.mp4'
+            path = f'./storage/video/{fileName}.mp4'
             # 비디오 저장
             # cv2.VideoWriter(저장 위치, 코덱, 프레임, (가로, 세로))
             out = cv2.VideoWriter(path, fourcc, fps, (streaming_window_width, streaming_window_height))

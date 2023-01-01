@@ -10,6 +10,7 @@ PATH="./video"
 def get_video_list_service():
     files = [f for f in listdir(PATH) if isfile(join(PATH, f))]
     result = natsort.natsorted(files)
+    result.pop()
     return result
 
 def send_bytes_range_requests(

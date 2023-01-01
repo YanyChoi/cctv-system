@@ -1,4 +1,5 @@
 import { API } from "../utils/prefix";
+import { WIDTH } from "../utils/size";
 
 const VideoPlayer = ({ videoId }: { videoId: string }) => {
   return (
@@ -6,7 +7,7 @@ const VideoPlayer = ({ videoId }: { videoId: string }) => {
       <video
         src={`${API}/video/${videoId}`}
         style={{
-          width: '95vw'
+          width: WIDTH
         }}
         controls
         autoPlay

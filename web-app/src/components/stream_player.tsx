@@ -1,4 +1,5 @@
 import { API } from "../utils/prefix";
+import { WIDTH } from "../utils/size";
 
 const StreamPlayer = ({setIsLoaded}: {setIsLoaded: (value: boolean) => void}) => {
   return (
@@ -6,7 +7,7 @@ const StreamPlayer = ({setIsLoaded}: {setIsLoaded: (value: boolean) => void}) =>
       <img
         src={`${API}/stream`}
         style={{
-          width: "95vw",
+          width: WIDTH,
         }}
         onLoad={() => setIsLoaded(true)}
       />

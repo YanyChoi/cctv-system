@@ -10,6 +10,7 @@ fastapi-simple-security==1.2
 h11==0.14.0
 httptools==0.5.0
 idna==3.4
+natsort==8.2.0
 numpy==1.24.1
 opencv-python==4.6.0.66
 pandas==1.5.2

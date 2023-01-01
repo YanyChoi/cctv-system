@@ -4,10 +4,12 @@ from os.path import isfile, join
 from typing import BinaryIO
 from fastapi import HTTPException, Request, status
 from fastapi.responses import StreamingResponse
+import natsort
 
 PATH="./video"
 def get_video_list_service():
-    result = [f for f in listdir(PATH) if isfile(join(PATH, f))]
+    files = [f for f in listdir(PATH) if isfile(join(PATH, f))]
+    result = natsort.natsorted(files)
     return result
 
 def send_bytes_range_requests(

@@ -9,8 +9,17 @@ import natsort
 PATH="./storage/video"
 def get_video_list_service():
     files = [f for f in listdir(PATH) if isfile(join(PATH, f))]
-    result = natsort.natsorted(files)
-    result.pop()
+    sorted = natsort.natsorted(files)
+    sorted.pop()
+    
+    result = dict()
+    for file in sorted:
+        date = file[:10]
+        if date in result.keys():
+            result[date].append(file)
+        else:
+            result[date] = [file]
+
     return result
 
 def send_bytes_range_requests(

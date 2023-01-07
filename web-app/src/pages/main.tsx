@@ -9,9 +9,9 @@ import {
   ToggleButtonGroup,
 } from "@mui/material";
 import AuthPage from "./auth";
-import ReactPlayer from "react-player";
-import { API } from "../utils/prefix";
+import { WIDTH } from "../utils/size";
 const MainPage = () => {
+  const [listBrought, setListBrought] = useState(false);
   const [targetVideo, setTargetVideo] = useState("");
   const [content, setContent] = useState("stream");
   const [pass, setPass] = useState(false);
@@ -31,7 +31,14 @@ const MainPage = () => {
               onChange={(event, value) => setContent(value)}
               aria-label="Platform"
             >
-              <ToggleButton value="stream">실시간</ToggleButton>
+              <ToggleButton
+                value="stream"
+                onClick={() => {
+                  setListBrought(false);
+                }}
+              >
+                실시간
+              </ToggleButton>
               <ToggleButton value="video">이전 영상</ToggleButton>
             </ToggleButtonGroup>
           </Grid>
@@ -45,10 +52,21 @@ const MainPage = () => {
               <>
                 <VideoPlayer videoId={targetVideo} />
                 {/* <ReactPlayer url={`${API}/video/${targetVideo}`} controls /> */}
-                <VideoList
-                  targetVideo={targetVideo}
-                  setTargetVideo={setTargetVideo}
-                />
+                <Grid
+                  container
+                  style={{
+                    marginTop: "10px",
+                    height: `calc(100vh - (${WIDTH} / 2 + 140px) )`,
+                    overflowY: "scroll",
+                  }}
+                >
+                  <VideoList
+                    targetVideo={targetVideo}
+                    setTargetVideo={setTargetVideo}
+                    listBrought={listBrought}
+                    setListBrought={setListBrought}
+                  />
+                </Grid>
               </>
             )}
           </Grid>

@@ -1,11 +1,12 @@
 import cv2
 import datetime
 import os
+import sys
 from dotenv import load_dotenv
 
 
 
-def writeVideo():
+def writeVideo(fileName):
     #현재시간 가져오기
     currentTime = datetime.datetime.now()
 
@@ -27,7 +28,6 @@ def writeVideo():
     streaming_window_height = int(video_capture.get(4))  
     
     #현재 시간을 '년도 달 일 시간 분 초'로 가져와서 문자열로 생성
-    fileName = str(currentTime.strftime('%Y-%m-%d_%H:%M:%S'))
 
     if not os.path.exists('./storage/video'):
         os.makedirs('./storage/video')
@@ -53,14 +53,7 @@ def writeVideo():
                 os.remove(expiredFile)
             print(f'store {fileName}.avi')
             out.release()  # out 객체 해제
-            currentTime = newTime
-            #현재 시간을 '년도 달 일 시간 분 초'로 가져와서 문자열로 생성
-            fileName = str(currentTime.strftime('%Y-%m-%d_%H:%M:%S'))
-            #파일 저장하기 위한 변수 선언
-            path = f'./storage/video/{fileName}.avi'
-            # 비디오 저장
-            # cv2.VideoWriter(저장 위치, 코덱, 프레임, (가로, 세로))
-            out = cv2.VideoWriter(path, fourcc, fps, (streaming_window_width, streaming_window_height))
+            break
 
         ret, frame = video_capture.read()
         # 촬영되는 영상보여준다. 프로그램 상태바 이름은 'streaming video' 로 뜬다.
@@ -79,4 +72,5 @@ def writeVideo():
     cv2.destroyAllWindows()
 
 if __name__ == "__main__":
-    writeVideo()
+    fileName = sys.argv[1]
+    writeVideo(fileName)

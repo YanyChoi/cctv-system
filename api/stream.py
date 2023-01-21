@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 
 
-def writeVideo(fileName):
+def writeVideo(fileName, oldDate):
     #현재시간 가져오기
     currentTime = datetime.datetime.now()
 
@@ -46,8 +46,7 @@ def writeVideo(fileName):
         #현재시간 가져오기
         newTime = datetime.datetime.now()
         if currentTime.hour < newTime.hour or (currentTime.hour == 23 and newTime.hour == 0):
-            expiredTime = newTime - datetime.timedelta(days = 28)
-            expiredFile = f"./storage/video/{str(expiredTime.strftime('%Y-%m-%d_%H:%M:%S'))}.mp4"
+            expiredFile = f"./storage/video/{oldDate}.mp4"
             if os.path.exists(expiredFile):
                 print(f'remove file {expiredFile}')
                 os.remove(expiredFile)
@@ -73,4 +72,5 @@ def writeVideo(fileName):
 
 if __name__ == "__main__":
     fileName = sys.argv[1]
-    writeVideo(fileName)
+    oldDate = sys.argv[2]
+    writeVideo(fileName, oldDate)
